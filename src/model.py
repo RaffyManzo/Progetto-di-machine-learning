@@ -21,6 +21,8 @@ def preprocess_data(input_file, output_file):
     data_cleaned = data_cleaned.dropna(subset=critical_columns)
     data_cleaned['Gender'] = data_cleaned['Gender'].fillna(data_cleaned['Gender'].mode()[0])
     data_cleaned['Age'] = data_cleaned['Age'].fillna(data_cleaned['Age'].mean())
+    # Creazione della nuova categoria "Non Definito" per i valori mancanti nella colonna EverBenched
+    data_cleaned['EverBenched'] = data_cleaned['EverBenched'].fillna('NotDefined')
 
     # One-hot encode categorical variables
     encoded_data = pd.get_dummies(data_cleaned, drop_first=False)
